@@ -1,0 +1,79 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  curso_id: 
+  motivacion_pregunta1: 1
+  motivacion_pregunta2: 1
+  motivacion_pregunta3: 1
+  motivacion_pregunta4: 1
+  motivacion_pregunta5: 1
+  motivacion_pregunta6: 1
+  motivacion_pregunta7: 1
+  motivacion_pregunta8: 1
+  motivacion_pregunta9: false
+  motivacion_pregunta10: 1
+  motivacion: MyText
+  representacion_pregunta11: 1
+  representacion_pregunta12: 1
+  representacion_pregunta13: 1
+  representacion_pregunta14: 1
+  representacion_pregunta15: 1
+  representacion_pregunta16: false
+  representacion_pregunta17: 1
+  representacion_pregunta18: 1
+  representacion_pregunta19: 1
+  representacion_pregunta20: 1
+  representacion_pregunta21: 1
+  representacion_pregunta22: 1
+  representacion: MyText
+  expresion_pregunta23: 1
+  expresion_pregunta24: 1
+  expresion_pregunta25: 1
+  expresion_pregunta26: 1
+  expresion_pregunta27: 1
+  expresion_pregunta28: 1
+  expresion_pregunta29: 1
+  expresion_pregunta30: 1
+  expresion_pregunta31: 1
+  expresion: MyText
+  texto_libre: MyText
+
+two:
+  user_id: 
+  curso_id: 
+  motivacion_pregunta1: 1
+  motivacion_pregunta2: 1
+  motivacion_pregunta3: 1
+  motivacion_pregunta4: 1
+  motivacion_pregunta5: 1
+  motivacion_pregunta6: 1
+  motivacion_pregunta7: 1
+  motivacion_pregunta8: 1
+  motivacion_pregunta9: false
+  motivacion_pregunta10: 1
+  motivacion: MyText
+  representacion_pregunta11: 1
+  representacion_pregunta12: 1
+  representacion_pregunta13: 1
+  representacion_pregunta14: 1
+  representacion_pregunta15: 1
+  representacion_pregunta16: false
+  representacion_pregunta17: 1
+  representacion_pregunta18: 1
+  representacion_pregunta19: 1
+  representacion_pregunta20: 1
+  representacion_pregunta21: 1
+  representacion_pregunta22: 1
+  representacion: MyText
+  expresion_pregunta23: 1
+  expresion_pregunta24: 1
+  expresion_pregunta25: 1
+  expresion_pregunta26: 1
+  expresion_pregunta27: 1
+  expresion_pregunta28: 1
+  expresion_pregunta29: 1
+  expresion_pregunta30: 1
+  expresion_pregunta31: 1
+  expresion: MyText
+  texto_libre: MyText

@@ -1,0 +1,46 @@
+<div class="col-md-12">
+  <div class="well col-md-12 col-md-offset-0">
+    <%= form_for(@transcripcion, :html => { :class => "form-horizontal" }) do |f| %>
+      <% if @transcripcion.errors.any? %>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><%= I18n.t("errors.messages.not_saved", :count => @transcripcion.errors.count, :resource => "transcripcion") %></h4>
+
+          <ul>
+          <% @transcripcion.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= f.hidden_field :curso_id %>
+
+      <div class="form-group">
+        <%= f.label t('mio.evaluacion_curso'), :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.select :curso_id, Curso.all.collect {|p| [ p.nombre, p.id ] }, { include_blank: true }, {:class => "selectpicker", 'data-width' => "100%", 'data-dropupauto' => "false", 'disabled' => "disabled"} %>
+        </div>
+      </div>
+            
+      <div class="form-group">
+        <%= f.label t('mio.evaluacion_idioma'), :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.select :idioma_id, Idioma.all.collect {|p| [ p.descripcion, p.id ] }, { include_blank: true }, {:class => "selectpicker", 'data-width' => "50%", 'data-dropupauto' => "false"} %>
+        </div>
+      </div>
+      
+      <div class="panel-footer">
+        <button type="submit" class="btn btn-primary" id="boton_aceptar">
+          <i class="glyphicon glyphicon-ok-sign"></i> 
+          <%= @transcripcion.new_record? ? "#{t('helpers.links.create')} #{t('mio.transcripcion')}" : "#{t('helpers.links.update')} #{t('mio.transcripcion')}" %>
+        </button>
+        <%= link_to @transcripcion.curso, :class => 'btn btn-default' do %>
+          <span class="glyphicon glyphicon-remove-sign"></span>
+          <%= t('helpers.links.cancel') %>
+        <% end %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

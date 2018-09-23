@@ -1,0 +1,37 @@
+<% breadcrumb :usuarios %>
+
+<div class="col-md-12">
+	<div class="well col-md-12">
+	  <%= link_to new_user_path, :class => 'btn btn-primary pull-right' do %>
+	    <span class="glyphicon glyphicon-plus"></span>
+      <%= "#{t('helpers.links.new')} #{t('mio.usuario')}" %>
+	  <% end %>
+
+	  <div class="pagination">
+	    <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+	  </div>
+
+		<table class="table table-condensed table-striped">
+			<thead>
+				<tr>
+					<th> </th>
+					<th> </th>
+					<th class="hidden-xs" colspan="4" style="text-align:center;"> Perfil </th>
+				</tr>
+				<tr>
+					<th> E-mail </th>
+					<th class="hidden-xs" style="text-align:center;"> Adm. </th>
+					<th class="hidden-xs" style="text-align:center;"> Usu. </th>
+					<th class="hidden-xs" style="text-align:center;"> Inv. </th>
+				</tr>
+			</thead>
+			<tbody> <%= render @users %> </tbody>
+		</table>
+
+	  <div class="pagination">
+	    <%#= will_paginate @users, renderer: BootstrapPagination::Rails %>
+	  </div>
+
+	</div>
+</div>
+

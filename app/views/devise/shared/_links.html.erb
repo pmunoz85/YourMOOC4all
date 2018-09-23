@@ -1,0 +1,37 @@
+<%- if controller_name != 'sessions' %>
+	<div>
+	  <%= link_to t("mio.identificarse"), new_session_path(resource_name) %>
+	</div>
+<% end -%>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+	<div>
+  	<%= link_to t("mio.registrarse"), new_registration_path(resource_name) %>
+	</div>
+<% end -%>
+
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+	<div>
+  	<%= link_to t("mio.olvido"), new_password_path(resource_name) %>
+	</div>
+<% end -%>
+
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+	<div>
+  	<%= link_to t("mio.no_instrucciones"), new_confirmation_path(resource_name) %>
+	</div>
+<% end -%>
+
+<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+	<div>
+  	<%= link_to t("mio.no_desbloqueo"), new_unlock_path(resource_name) %>
+	</div>
+<% end -%>
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+		<div>
+    	<%= link_to  "#{t("mio.registrase_con")} #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %>
+		</div>
+  <% end -%>
+<% end -%>

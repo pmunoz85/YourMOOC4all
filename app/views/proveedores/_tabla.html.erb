@@ -1,0 +1,23 @@
+    <div class="pagination">
+      <%= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>
+
+    <table class="table table-condensed table-striped table-hover">
+      <thead>
+        <tr>
+					<th><%= t('mio.curso_nombre') %></th>
+					<th>Url</th>
+				</tr>
+      </thead>
+
+      <tbody>
+        <%= content_tag_for(:tr, registros) do |proveedor| %>
+					<td><%= link_to proveedor.nombre, proveedor %></td>
+					<td><%= link_to proveedor.url, edit_proveedor_path(proveedor) %></td>
+				<% end -%>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <%#= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>

@@ -1,0 +1,36 @@
+<% breadcrumb :registrar_usuario %>
+
+<div id='buscador' class='col-lg-8 col-md-7 col-sm-6 col-xs-12'>
+
+  <h2><%= t('mio.registrarse') %></h2>
+
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { :class => "form-horizontal" }) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-group">
+      <%= f.label :email, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-9">
+        <%= f.email_field :email, required: true, autofocus: true, :class => "form-control" %> 
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label t('mio.password'), :for => 'user_password', :class => "col-sm-2 control-label" %>
+      <div class="col-sm-9">
+        <%= f.password_field :password, placeholder: ("#{@minimum_password_length} caracteres mínimo" if @minimum_password_length), required: true, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label t('mio.confirmar_password'), :for => 'user_password_confirmation', :class => "col-sm-2 control-label" %>
+      <div class="col-sm-9">
+        <%= f.password_field :password_confirmation, required: true, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, t('mio.registrarse'), :class => 'btn btn-default' %>
+    </div>
+  <% end %>
+
+</div>

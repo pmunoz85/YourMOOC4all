@@ -1,0 +1,35 @@
+    <div class="pagination">
+      <%%= will_paginate registros %>
+    </div>
+
+    <table class="table table-condensed table-striped table-hover">
+      <thead>
+        <tr>
+    <% attributes.each do |attribute| -%>
+          <th><%= attribute.human_name %></th>
+    <% end -%>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%%= content_tag_for(:tr, registros) do |<%= singular_table_name %>| %>
+    <% columna = 1 -%>
+    <% attributes.each do |attribute| -%>
+      <% if columna == 1 -%>
+          <td><%%= link_to <%= singular_table_name %>.<%= attribute.name %>, <%= singular_table_name %> %></td>
+      <% end -%>
+      <% if columna == 2 -%>
+          <td><%%= link_to <%= singular_table_name %>.<%= attribute.name %>, edit_<%= singular_table_name %>_path(<%= singular_table_name %>) %></td>
+      <% end -%>
+      <% if columna > 2 -%>
+          <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+      <% end -%>
+      <% columna += 1 -%>
+    <% end -%>
+        <%% end -%>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <%%= will_paginate registros %>
+    </div>

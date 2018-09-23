@@ -1,0 +1,33 @@
+  <div id='presentacion' class='container-fluid' >
+    <div class='col-lg-12 col-md-12 col-sm-12 hidden-12'>
+    <a href="#content">UNED</a>
+    </div>
+    <div class='col-lg-12 col-md-12 col-sm-12 hidden-12'>
+      <%= link_to_unless_current "English", locale: "en", user: params[:user], curso: params[:curso] %> |
+      <%= link_to_unless_current "Español", locale: "es", user: params[:user], curso: params[:curso] %>
+    </div>
+    
+    <%= link_to home_index_url do %>
+      <div class='col-lg-4 col-md-4 col-sm-12 hidden-12 text-center'>
+        <h1>YourMOOC4all</h1>
+      </div>
+    <% end %>
+    <div class='col-lg-7 col-md-7 col-sm-12 hidden-xs text-center'>
+      <h2><%= t("mio.cabecera_texto") %></h2>
+    </div>
+  </div>
+
+  <%= breadcrumbs style: :bootstrap %>
+
+  <div class="container layout-contenido">
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, :class => "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable" do %>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= msg %>
+      <% end %>
+    <% end %>
+  </div>
+
+
+
+

@@ -1,0 +1,15 @@
+<% breadcrumb :plataformas %>
+
+<div class="col-md-12">
+  <div class="well-sombra well col-md-12 col-md-offset-0">
+  <%= link_to new_proveedor_path, :class => 'btn btn-primary pull-right' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      <%= "#{t('helpers.links.new')} #{t('mio.proveedor')}" %>
+    <% end %>
+
+    <%= render partial: 'tabla', locals: {registros: @proveedores} %>
+
+  </div>
+ </div>
+
+

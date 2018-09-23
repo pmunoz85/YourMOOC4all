@@ -1,0 +1,29 @@
+    <div class="pagination">
+      <%= will_paginate registros %>
+    </div>
+
+    <table class="table table-condensed table-striped table-hover">
+      <thead>
+        <tr>
+          <th><%= t('mio.evaluacion_motivacion') %></th>
+          <th class='hidden-xs hidden-sm'><%= t('mio.evaluacion_representacion') %></th>
+          <th class='hidden-xs hidden-sm'><%= t('mio.evaluacion_expresion') %></th>
+          <th class='hidden-xs'><%= t('mio.evaluacion_texto') %></th>
+          <th class='hidden-xs'></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= content_tag_for(:tr, registros) do |evaluacion| %>
+          <td><%= link_to evaluacion.motivacion, evaluacion %></td>
+          <td class='hidden-xs hidden-sm'><%= link_to evaluacion.representacion, edit_evaluacion_path(evaluacion) %></td>
+          <td class='hidden-xs hidden-sm'><%= evaluacion.expresion %></td>
+          <td class='hidden-xs'><%= evaluacion.texto_libre %></td>
+          <td class='hidden-xs'><%= evaluacion.media.round(2) unless evaluacion.media.nil? %></td>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <%#= will_paginate registros %>
+    </div>

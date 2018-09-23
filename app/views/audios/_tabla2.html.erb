@@ -1,0 +1,15 @@
+    <div class="pagination">
+      <%= will_paginate registros %>
+    </div>
+
+    <table class="table table-condensed table-striped table-hover">
+      <tbody>
+        <%= content_tag_for(:tr, registros) do |audio| %>
+          <td><h4><%= link_to audio.idioma, edit_audio_path(audio) %></h4></td>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <%#= will_paginate registros %>
+    </div>

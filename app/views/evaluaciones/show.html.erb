@@ -1,0 +1,110 @@
+<%- model_class = Evaluacion -%>
+<div class="col-md-12">
+  <div class="well col-md-12 ">
+    <dl class="dl-horizontal">
+      <dt>User:</dt>
+      <dd><%= @evaluacion.user.email %></dd>
+      <dt>Curso:</dt>
+      <dd><%= @evaluacion.curso %></dd>
+      <dt>Motivacion pregunta1:</dt>
+      <dd><%= @evaluacion.motivacion_pregunta1 %></dd>
+      <dt>Motivacion pregunta2:</dt>
+      <dd><%= @evaluacion.motivacion_pregunta2 %></dd>
+      <dt>Motivacion pregunta3:</dt>
+      <dd><%= @evaluacion.motivacion_pregunta3 %></dd>
+      <dt>Motivacion pregunta4:</dt>
+      <dd><%= @evaluacion.motivacion_pregunta4 %></dd>
+      <dt>Motivacion pregunta5:</dt>
+      <dd><%= @evaluacion.motivacion_pregunta5 %></dd>
+      <dt>Motivacion pregunta6:</dt>
+      <dd><%= @evaluacion.motivacion_pregunta6 %></dd>
+      <dt>Motivacion pregunta7:</dt>
+      <dd><%= @evaluacion.motivacion_pregunta7 %></dd>
+      <dt>Motivacion pregunta8:</dt>
+      <dd><%= @evaluacion.motivacion_pregunta8 %></dd>
+      <dt>Motivacion pregunta9:</dt>
+      <dd><%= @evaluacion.motivacion_pregunta9 %></dd>
+      <dt>Motivacion pregunta10:</dt>
+      <dd><%= @evaluacion.motivacion_pregunta10 %></dd>
+      <dt>Motivacion:</dt>
+      <dd><%= @evaluacion.motivacion %></dd>
+      <dt>Representacion pregunta11:</dt>
+      <dd><%= @evaluacion.representacion_pregunta11 %></dd>
+      <dt>Representacion pregunta12:</dt>
+      <dd><%= @evaluacion.representacion_pregunta12 %></dd>
+      <dt>Representacion pregunta13:</dt>
+      <dd><%= @evaluacion.representacion_pregunta13 %></dd>
+      <dt>Representacion pregunta14:</dt>
+      <dd><%= @evaluacion.representacion_pregunta14 %></dd>
+      <dt>Representacion pregunta15:</dt>
+      <dd><%= @evaluacion.representacion_pregunta15 %></dd>
+      <dt>Representacion pregunta16:</dt>
+      <dd><%= @evaluacion.representacion_pregunta16 %></dd>
+      <dt>Representacion pregunta17:</dt>
+      <dd><%= @evaluacion.representacion_pregunta17 %></dd>
+      <dt>Representacion pregunta18:</dt>
+      <dd><%= @evaluacion.representacion_pregunta18 %></dd>
+      <dt>Representacion pregunta19:</dt>
+      <dd><%= @evaluacion.representacion_pregunta19 %></dd>
+      <dt>Representacion pregunta20:</dt>
+      <dd><%= @evaluacion.representacion_pregunta20 %></dd>
+      <dt>Representacion pregunta21:</dt>
+      <dd><%= @evaluacion.representacion_pregunta21 %></dd>
+      <dt>Representacion pregunta22:</dt>
+      <dd><%= @evaluacion.representacion_pregunta22 %></dd>
+      <dt>Representacion:</dt>
+      <dd><%= @evaluacion.representacion %></dd>
+      <dt>Expresion pregunta23:</dt>
+      <dd><%= @evaluacion.expresion_pregunta23 %></dd>
+      <dt>Expresion pregunta24:</dt>
+      <dd><%= @evaluacion.expresion_pregunta24 %></dd>
+      <dt>Expresion pregunta25:</dt>
+      <dd><%= @evaluacion.expresion_pregunta25 %></dd>
+      <dt>Expresion pregunta26:</dt>
+      <dd><%= @evaluacion.expresion_pregunta26 %></dd>
+      <dt>Expresion pregunta27:</dt>
+      <dd><%= @evaluacion.expresion_pregunta27 %></dd>
+      <dt>Expresion pregunta28:</dt>
+      <dd><%= @evaluacion.expresion_pregunta28 %></dd>
+      <dt>Expresion pregunta29:</dt>
+      <dd><%= @evaluacion.expresion_pregunta29 %></dd>
+      <dt>Expresion pregunta30:</dt>
+      <dd><%= @evaluacion.expresion_pregunta30 %></dd>
+      <dt>Expresion pregunta31:</dt>
+      <dd><%= @evaluacion.expresion_pregunta31 %></dd>
+      <dt>Expresion:</dt>
+      <dd><%= @evaluacion.expresion %></dd>
+      <dt>Texto libre:</dt>
+      <dd><%= @evaluacion.texto_libre %></dd>
+
+    </dl>
+
+    <div class="panel-footer">
+      <%= link_to evaluaciones_path, :class => 'btn btn-default' do %>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <%= t('.back', :default => t("helpers.links.back", :default => 'Volver')) %>
+      <% end %>
+      <%= link_to edit_evaluacion_path(@evaluacion), :class => 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <%= t('.edit', :default => t("helpers.links.edit", :default => 'Editar')) %>
+      <% end %>
+
+      <%= link_to evaluacion_path(@evaluacion), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => "¿Eliminar el evaluacion '#{@evaluacion.id}'?")) }, :class => 'btn btn-danger' do %>
+        <span class="glyphicon glyphicon-trash"></span>
+        <%= t('.destroy', :default => t("helpers.links.destroy")) %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+  
+                                
+    
+    
+    
+    
+                                
+    
+    
+    
+                                                                        

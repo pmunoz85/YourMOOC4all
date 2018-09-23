@@ -1,0 +1,13 @@
+<div class="col-md-12">
+  <div class="well-sombra well col-md-12 col-md-offset-0">
+  	<%= link_to new_subtitulo_path, :class => 'btn btn-primary pull-right' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      <%= "#{t('helpers.links.new')} #{t('mio.subtitulo')}" %>
+    <% end %>
+
+    <%= render partial: 'tabla', locals: {registros: @subtitulos} %>
+
+  </div>
+ </div>
+
+

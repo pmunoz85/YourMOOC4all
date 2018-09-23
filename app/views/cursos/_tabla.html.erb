@@ -1,0 +1,37 @@
+    <div class="pagination">
+      <%= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>
+
+    <table class="table table-condensed table-striped table-hover">
+      <thead>
+        <tr>
+					<th><%= t('mio.curso_nombre') %></th>
+          <th class='hidden-xs'><%= t('mio.curso_plataforma') %></th>
+					<th class='hidden-xs'><%= t('mio.curso_imagen') %></th>
+					<th><%= t('mio.curso_institucion') %></th>
+					<th class='hidden-xs hidden-sm'><%= t('mio.curso_tematica') %></th>
+					<th class='hidden-xs hidden-sm'><%= t('mio.curso_esfuerzo') %></th>
+					<th><%= t('mio.curso_enlace') %></th>
+				</tr>
+      </thead>
+
+      <tbody>
+        <%= content_tag_for(:tr, registros) do |curso| %>
+          <td><%= link_to curso.nombre, curso %></td>
+          <td class='hidden-xs'><%= curso.proveedor %></td>
+					<td class='hidden-xs'><%= image_tag(curso.imagen_url, size: '150x150', alt: "Imagen del curso: #{curso.nombre}") %></td>
+          <td><%= curso.universidad %></td>
+          <td class='hidden-xs hidden-sm'><%= curso.tematica_sin_html unless curso.tematica.nil? %></td>
+          <td class='hidden-xs hidden-sm'><%= curso.esfuerzo_estimado.html_safe unless curso.esfuerzo_estimado.nil? %></td>
+          <td>
+						<%= link_to "#{curso.url}#{curso.identificador}", :class => 'btn btn-default' do %>
+							<span class="glyphicon glyphicon-share" alt="Imagen del curso: <%=curso.nombre%>"></span>
+						<% end -%>
+					</td>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <%#= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>

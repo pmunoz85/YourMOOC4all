@@ -1,0 +1,52 @@
+<div id='buscador'>
+
+  <h2>Editar <%= resource_name.to_s.humanize %></h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal" }) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="form-group">
+      <%= f.label :email, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-9">
+        <%= f.email_field :email, required: true, autofocus: true, :class => "form-control" %> 
+      </div>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Actualmente estamos esperando la confirmación de: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :password, :class => "col-sm-2 control-label" %> 
+      <div class="col-sm-9">
+        <%= f.password_field :password, autocomplete: 'off', placeholder: "déjela en blanco si no quiere cambiarla", required: false, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-9">
+        <%= f.password_field :password_confirmation, autocomplete: "off", required: false, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :current_password, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-9">
+        <%= f.password_field :current_password, autocomplete: "off", placeholder: "necesitamos su contraseña actual para confirmar los cambios", required: true, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Actualizar" %>
+    </div>
+
+  <% end %>
+
+  <h3>Cancelar mi cuenta</h3>
+
+  <p>¿No está contento con nuestro servicio? <%= button_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "¿Está seguro?" }, method: :delete %></p>
+
+  <%= link_to t('mio.volver'), :back %>
+
+</div>

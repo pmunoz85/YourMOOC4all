@@ -1,0 +1,62 @@
+<div class="col-md-12">
+
+<div class="row-fluid tramite-formulario col-md-10 col-md-offset-1">
+  <div class="span12 well">
+		<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+      <% if @user.errors.any? %>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><%= I18n.t("errors.messages.not_saved", :count => @user.errors.count, :resource => "usuario") %></h4>
+
+          <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.label :email, :class => "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.email_field :email, :autofocus => true, :class => "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+				<label class="col-sm-3 control-label <%= 'field_with_errors' if @user.errors.include?(:password) %>"> <%= t('mio.pass') %> </label>
+        <div class="col-sm-4">
+          <%= f.password_field :password, :autocomplete => "off", :class => "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+				<label class="col-sm-3 control-label <%= 'field_with_errors' if @user.errors.include?(:password_confirmation) %>"> <%= t('mio.pass_confirm') %> </label>
+        <div class="col-sm-4">
+          <%= f.password_field :password_confirmation, :autocomplete => "off", :class => "form-control" %>
+        </div>
+      </div>
+
+			<br/>
+			<% if current_user.roles.include?(Role.find_by_name('administrador')) %>
+				<% for role in Role.all %>
+					<div class="input-group">
+						<div >
+							<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+							<%= role.name %>
+						</div>
+					</div>
+				<% end %>
+			<% end %>
+			<br/>
+      <div class="panel-footer">
+        <button type="submit" class="btn btn-success">
+          <i class="glyphicon glyphicon-ok-sign"></i> 
+          <%= @user.new_record? ? "#{t('helpers.links.create')} #{t('mio.usuario')}" : "#{t('helpers.links.update')} #{t('mio.usuario')}" %>
+        </button>
+        <%= link_to users_path, :class => 'btn btn-default' do %>
+          <span class="glyphicon glyphicon-remove-sign"></span>
+          <%= t('helpers.links.cancel') %>
+        <% end %>
+      </div>
+		<% end %>
+	</div>
+</div>
+</div>

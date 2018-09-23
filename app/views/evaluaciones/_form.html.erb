@@ -1,0 +1,699 @@
+<% breadcrumb :votar, @evaluacion.curso %>
+
+<div id='centro' class="col-md-12">
+  <div class="well col-md-12 col-md-offset-0">
+    <%= form_for(@evaluacion, :html => { :class => "form-horizontal" }) do |f| %>
+      <% if @evaluacion.errors.any? %>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><%= I18n.t("errors.messages.not_saved", :count => @evaluacion.errors.count, :resource => "evaluacion") %></h4>
+
+          <ul>
+          <% @evaluacion.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= f.hidden_field :user_id, :title => 'usuario' %>
+      <%= f.hidden_field :curso_id, :title => 'curso' %>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <h2>
+            <%= t('mio.puntuacion_de') %> <%= current_user.email %> <%= t('mio.para_el_curso') %><br />
+            <%= Curso.find(@evaluacion.curso_id).nombre %>
+          </h2>
+          <h3>
+            <%= t('mio.puntuacion') %>
+          </h3>
+        </div>
+      </div>
+
+<script type="text/javascript">
+  function verResto(div) {
+    var x = document.getElementById(div);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+  }
+
+  function verMasMenos(div) {
+    var x = document.getElementById(div);
+    if (x.innerHTML === "+") {
+        x.innerHTML = "-";
+    } else {
+        x.innerHTML = "+";
+    }
+  }   
+</script>
+
+      <div class="form-group">
+        <%= f.label :experiencia, t('mio.experiencia'), :class => "col-sm-2 control-label" %>
+        <div class="col-sm-4">
+          <%= f.select :experiencia, options_for_select([ t('mio.experiencia_sin'), t('mio.experiencia_conocimiento'), t('mio.experiencia_estudie'), t('mio.experiencia_trabajo'), t('mio.experiencia_profesor')], @evaluacion.experiencia), { include_blank: true }, {:class => "selectpicker", 'data-dropupauto' => "false"} %>
+        </div>
+
+        <%= f.label :progreso, t('mio.progreso'), :class => "col-sm-2 control-label" %>
+        <div class="col-sm-4">
+          <%= f.select :progreso, options_for_select([ t('mio.progreso_abandonado'), t('mio.progreso_haciendo'), t('mio.progreso_completado')], @evaluacion.progreso), { include_blank: true }, {:class => "selectpicker", 'data-dropupauto' => "false"} %>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading"> 
+          <div class="row">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <h3><%= t('mio.motivacion_cabecera') %></h3>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+                <h4>1 2 3 4 5</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+
+              <%= t('mio.motivacion_pregunta1') %>
+              <button id='boton01' type='button' onclick="verResto('myDIV01'); verMasMenos('boton01');">+</button>
+              <div id='myDIV01' style='display:none;'><%= t('mio.motivacion_pregunta1_mas') %></div>
+
+            </div>
+
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :motivacion_pregunta1, '1', :title => 'motivacion_pregunta1_1' %> 
+              <%= f.radio_button :motivacion_pregunta1, '2', :title => 'motivacion_pregunta1_2' %> 
+              <%= f.radio_button :motivacion_pregunta1, '3', :title => 'motivacion_pregunta1_3' %> 
+              <%= f.radio_button :motivacion_pregunta1, '4', :title => 'motivacion_pregunta1_4' %> 
+              <%= f.radio_button :motivacion_pregunta1, '5', :title => 'motivacion_pregunta1_5' %> 
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.motivacion_pregunta2') %>
+              <button id='boton02' type='button' onclick="verResto('myDIV02'); verMasMenos('boton02');">+</button>
+              <div id='myDIV02' style='display:none;'><%= t('mio.motivacion_pregunta2_mas') %></div>
+            </div>
+
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :motivacion_pregunta2, '1', :title => 'motivacion_pregunta2_1' %> 
+              <%= f.radio_button :motivacion_pregunta2, '2', :title => 'motivacion_pregunta2_2' %> 
+              <%= f.radio_button :motivacion_pregunta2, '3', :title => 'motivacion_pregunta2_3' %> 
+              <%= f.radio_button :motivacion_pregunta2, '4', :title => 'motivacion_pregunta2_4' %> 
+              <%= f.radio_button :motivacion_pregunta2, '5', :title => 'motivacion_pregunta2_5' %> 
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.motivacion_pregunta3') %>
+              <button id='boton03' type='button' onclick="verResto('myDIV03'); verMasMenos('boton03');">+</button>
+              <div id='myDIV03' style='display:none;'><%= t('mio.motivacion_pregunta3_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :motivacion_pregunta3, '1', :title => 'motivacion_pregunta3_1' %>
+              <%= f.radio_button :motivacion_pregunta3, '2', :title => 'motivacion_pregunta3_2' %>
+              <%= f.radio_button :motivacion_pregunta3, '3', :title => 'motivacion_pregunta3_3' %>
+              <%= f.radio_button :motivacion_pregunta3, '4', :title => 'motivacion_pregunta3_4' %>
+              <%= f.radio_button :motivacion_pregunta3, '5', :title => 'motivacion_pregunta3_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.motivacion_pregunta4') %>
+              <button id='boton04' type='button' onclick="verResto('myDIV04'); verMasMenos('boton04');">+</button>
+              <div id='myDIV04' style='display:none;'><%= t('mio.motivacion_pregunta4_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :motivacion_pregunta4, '1', :title => 'motivacion_pregunta4_1' %>
+              <%= f.radio_button :motivacion_pregunta4, '2', :title => 'motivacion_pregunta4_2' %>
+              <%= f.radio_button :motivacion_pregunta4, '3', :title => 'motivacion_pregunta4_3' %>
+              <%= f.radio_button :motivacion_pregunta4, '4', :title => 'motivacion_pregunta4_4' %>
+              <%= f.radio_button :motivacion_pregunta4, '5', :title => 'motivacion_pregunta4_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.motivacion_pregunta5') %>
+              <button id='boton05' type='button' onclick="verResto('myDIV05'); verMasMenos('boton05');">+</button>
+              <div id='myDIV05' style='display:none;'><%= t('mio.motivacion_pregunta5_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :motivacion_pregunta5, '1', :title => 'motivacion_pregunta5_1' %>
+              <%= f.radio_button :motivacion_pregunta5, '2', :title => 'motivacion_pregunta5_2' %>
+              <%= f.radio_button :motivacion_pregunta5, '3', :title => 'motivacion_pregunta5_3' %>
+              <%= f.radio_button :motivacion_pregunta5, '4', :title => 'motivacion_pregunta5_4' %>
+              <%= f.radio_button :motivacion_pregunta5, '5', :title => 'motivacion_pregunta5_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.motivacion_pregunta6') %>
+              <button id='boton06' type='button' onclick="verResto('myDIV06'); verMasMenos('boton06');">+</button>
+              <div id='myDIV06' style='display:none;'><%= t('mio.motivacion_pregunta6_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :motivacion_pregunta6, '1', :title => 'motivacion_pregunta6_1' %>
+              <%= f.radio_button :motivacion_pregunta6, '2', :title => 'motivacion_pregunta6_2' %>
+              <%= f.radio_button :motivacion_pregunta6, '3', :title => 'motivacion_pregunta6_3' %>
+              <%= f.radio_button :motivacion_pregunta6, '4', :title => 'motivacion_pregunta6_4' %>
+              <%= f.radio_button :motivacion_pregunta6, '5', :title => 'motivacion_pregunta6_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.motivacion_pregunta7') %>
+              <button id='boton07' type='button' onclick="verResto('myDIV07'); verMasMenos('boton07');">+</button>
+              <div id='myDIV07' style='display:none;'><%= t('mio.motivacion_pregunta7_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :motivacion_pregunta7, '1', :title => 'motivacion_pregunta7_1' %>
+              <%= f.radio_button :motivacion_pregunta7, '2', :title => 'motivacion_pregunta7_2' %>
+              <%= f.radio_button :motivacion_pregunta7, '3', :title => 'motivacion_pregunta7_3' %>
+              <%= f.radio_button :motivacion_pregunta7, '4', :title => 'motivacion_pregunta7_4' %>
+              <%= f.radio_button :motivacion_pregunta7, '5', :title => 'motivacion_pregunta7_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.motivacion_pregunta8') %>
+              <button id='boton08' type='button' onclick="verResto('myDIV08'); verMasMenos('boton08');">+</button>
+              <div id='myDIV08' style='display:none;'><%= t('mio.motivacion_pregunta8_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :motivacion_pregunta8, '1', :title => 'motivacion_pregunta8_1' %>
+              <%= f.radio_button :motivacion_pregunta8, '2', :title => 'motivacion_pregunta8_2' %>
+              <%= f.radio_button :motivacion_pregunta8, '3', :title => 'motivacion_pregunta8_3' %>
+              <%= f.radio_button :motivacion_pregunta8, '4', :title => 'motivacion_pregunta8_4' %>
+              <%= f.radio_button :motivacion_pregunta8, '5', :title => 'motivacion_pregunta8_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.motivacion_pregunta9') %>
+              <button id='boton09' type='button' onclick="verResto('myDIV09'); verMasMenos('boton09');">+</button>
+              <div id='myDIV09' style='display:none;'><%= t('mio.motivacion_pregunta9_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :motivacion_pregunta9, '1', :title => 'motivacion_pregunta9_1' %>
+              <%= f.radio_button :motivacion_pregunta9, '2', :title => 'motivacion_pregunta9_2' %>
+              <%= f.radio_button :motivacion_pregunta9, '3', :title => 'motivacion_pregunta9_3' %>
+              <%= f.radio_button :motivacion_pregunta9, '4', :title => 'motivacion_pregunta9_4' %>
+              <%= f.radio_button :motivacion_pregunta9, '5', :title => 'motivacion_pregunta9_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.motivacion_pregunta10') %>
+              <button id='boton10' type='button' onclick="verResto('myDIV10'); verMasMenos('boton10');">+</button>
+              <div id='myDIV10' style='display:none;'><%= t('mio.motivacion_pregunta10_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :motivacion_pregunta10, '1', :title => 'motivacion_pregunta10_1' %>
+              <%= f.radio_button :motivacion_pregunta10, '2', :title => 'motivacion_pregunta10_2' %>
+              <%= f.radio_button :motivacion_pregunta10, '3', :title => 'motivacion_pregunta10_3' %>
+              <%= f.radio_button :motivacion_pregunta10, '4', :title => 'motivacion_pregunta10_4' %>
+              <%= f.radio_button :motivacion_pregunta10, '5', :title => 'motivacion_pregunta10_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'> 
+              <h4><%= t('mio.motivacion') %></h4>
+            </div>
+            <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+              <%= f.text_area :motivacion, :class => "form-control", :title => 'texto motivación' %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading"> 
+          <div class="row">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <h3><%= t('mio.representacion_cabecera') %></h3>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+                <h4>1 2 3 4 5</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta11') %>
+              <button id='boton11' type='button' onclick="verResto('myDIV11'); verMasMenos('boton11');">+</button>
+              <div id='myDIV11' style='display:none;'><%= t('mio.representacion_pregunta11_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta11, '1', :title => 'motivacion_pregunta11_1' %>
+              <%= f.radio_button :representacion_pregunta11, '2', :title => 'motivacion_pregunta11_2' %>
+              <%= f.radio_button :representacion_pregunta11, '3', :title => 'motivacion_pregunta11_3' %>
+              <%= f.radio_button :representacion_pregunta11, '4', :title => 'motivacion_pregunta11_4' %>
+              <%= f.radio_button :representacion_pregunta11, '5', :title => 'motivacion_pregunta11_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta12') %>
+              <button id='boton12' type='button' onclick="verResto('myDIV12'); verMasMenos('boton12');">+</button>
+              <div id='myDIV12' style='display:none;'><%= t('mio.representacion_pregunta12_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta12, '1', :title => 'motivacion_pregunta12_1' %>
+              <%= f.radio_button :representacion_pregunta12, '2', :title => 'motivacion_pregunta12_2' %>
+              <%= f.radio_button :representacion_pregunta12, '3', :title => 'motivacion_pregunta12_3' %>
+              <%= f.radio_button :representacion_pregunta12, '4', :title => 'motivacion_pregunta12_4' %>
+              <%= f.radio_button :representacion_pregunta12, '5', :title => 'motivacion_pregunta12_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta13') %>
+              <button id='boton13' type='button' onclick="verResto('myDIV13'); verMasMenos('boton13');">+</button>
+              <div id='myDIV13' style='display:none;'><%= t('mio.representacion_pregunta13_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta13, '1', :title => 'motivacion_pregunta13_1' %>
+              <%= f.radio_button :representacion_pregunta13, '2', :title => 'motivacion_pregunta13_2' %>
+              <%= f.radio_button :representacion_pregunta13, '3', :title => 'motivacion_pregunta13_3' %>
+              <%= f.radio_button :representacion_pregunta13, '4', :title => 'motivacion_pregunta13_4' %>
+              <%= f.radio_button :representacion_pregunta13, '5', :title => 'motivacion_pregunta13_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta14') %>
+              <button id='boton14' type='button' onclick="verResto('myDIV14'); verMasMenos('boton14');">+</button>
+              <div id='myDIV14' style='display:none;'><%= t('mio.representacion_pregunta14_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta14, '1', :title => 'motivacion_pregunta14_1' %>
+              <%= f.radio_button :representacion_pregunta14, '2', :title => 'motivacion_pregunta14_2' %>
+              <%= f.radio_button :representacion_pregunta14, '3', :title => 'motivacion_pregunta14_3' %>
+              <%= f.radio_button :representacion_pregunta14, '4', :title => 'motivacion_pregunta14_4' %>
+              <%= f.radio_button :representacion_pregunta14, '5', :title => 'motivacion_pregunta14_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta15') %>
+              <button id='boton15' type='button' onclick="verResto('myDIV15'); verMasMenos('boton15');">+</button>
+              <div id='myDIV15' style='display:none;'><%= t('mio.representacion_pregunta15_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta15, '1', :title => 'motivacion_pregunta15_1' %>
+              <%= f.radio_button :representacion_pregunta15, '2', :title => 'motivacion_pregunta15_2' %>
+              <%= f.radio_button :representacion_pregunta15, '3', :title => 'motivacion_pregunta15_3' %>
+              <%= f.radio_button :representacion_pregunta15, '4', :title => 'motivacion_pregunta15_4' %>
+              <%= f.radio_button :representacion_pregunta15, '5', :title => 'motivacion_pregunta15_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+    					<%= t('mio.representacion_pregunta16') %>
+              <button id='boton16' type='button' onclick="verResto('myDIV16'); verMasMenos('boton16');">+</button>
+              <div id='myDIV16' style='display:none;'><%= t('mio.representacion_pregunta16_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta16, '1', :title => 'motivacion_pregunta16_1' %>
+              <%= f.radio_button :representacion_pregunta16, '2', :title => 'motivacion_pregunta16_2' %>
+              <%= f.radio_button :representacion_pregunta16, '3', :title => 'motivacion_pregunta16_3' %>
+              <%= f.radio_button :representacion_pregunta16, '4', :title => 'motivacion_pregunta16_4' %>
+              <%= f.radio_button :representacion_pregunta16, '5', :title => 'motivacion_pregunta16_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta17') %>
+              <button id='boton17' type='button' onclick="verResto('myDIV17'); verMasMenos('boton17');">+</button>
+              <div id='myDIV17' style='display:none;'><%= t('mio.representacion_pregunta17_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta17, '1', :title => 'motivacion_pregunta17_1' %>
+              <%= f.radio_button :representacion_pregunta17, '2', :title => 'motivacion_pregunta17_2' %>
+              <%= f.radio_button :representacion_pregunta17, '3', :title => 'motivacion_pregunta17_3' %>
+              <%= f.radio_button :representacion_pregunta17, '4', :title => 'motivacion_pregunta17_4' %>
+              <%= f.radio_button :representacion_pregunta17, '5', :title => 'motivacion_pregunta17_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta18') %>
+              <button id='boton18' type='button' onclick="verResto('myDIV18'); verMasMenos('boton18');">+</button>
+              <div id='myDIV18' style='display:none;'><%= t('mio.representacion_pregunta18_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta18, '1', :title => 'motivacion_pregunta18_1' %>
+              <%= f.radio_button :representacion_pregunta18, '2', :title => 'motivacion_pregunta18_2' %>
+              <%= f.radio_button :representacion_pregunta18, '3', :title => 'motivacion_pregunta18_3' %>
+              <%= f.radio_button :representacion_pregunta18, '4', :title => 'motivacion_pregunta18_4' %>
+              <%= f.radio_button :representacion_pregunta18, '5', :title => 'motivacion_pregunta18_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta19') %>
+              <button id='boton19' type='button' onclick="verResto('myDIV19'); verMasMenos('boton19');">+</button>
+              <div id='myDIV19' style='display:none;'><%= t('mio.representacion_pregunta19_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta19, '1', :title => 'motivacion_pregunta19_1' %>
+              <%= f.radio_button :representacion_pregunta19, '2', :title => 'motivacion_pregunta19_2' %>
+              <%= f.radio_button :representacion_pregunta19, '3', :title => 'motivacion_pregunta19_3' %>
+              <%= f.radio_button :representacion_pregunta19, '4', :title => 'motivacion_pregunta19_4' %>
+              <%= f.radio_button :representacion_pregunta19, '5', :title => 'motivacion_pregunta19_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta20') %>
+              <button id='boton20' type='button' onclick="verResto('myDIV20'); verMasMenos('boton20');">+</button>
+              <div id='myDIV20' style='display:none;'><%= t('mio.representacion_pregunta20_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta20, '1', :title => 'motivacion_pregunta20_1' %>
+              <%= f.radio_button :representacion_pregunta20, '2', :title => 'motivacion_pregunta20_2' %>
+              <%= f.radio_button :representacion_pregunta20, '3', :title => 'motivacion_pregunta20_3' %>
+              <%= f.radio_button :representacion_pregunta20, '4', :title => 'motivacion_pregunta20_4' %>
+              <%= f.radio_button :representacion_pregunta20, '5', :title => 'motivacion_pregunta20_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta21') %>
+              <button id='boton21' type='button' onclick="verResto('myDIV21'); verMasMenos('boton21');">+</button>
+              <div id='myDIV21' style='display:none;'><%= t('mio.representacion_pregunta21_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta21, '1', :title => 'motivacion_pregunta21_1' %>
+              <%= f.radio_button :representacion_pregunta21, '2', :title => 'motivacion_pregunta21_2' %>
+              <%= f.radio_button :representacion_pregunta21, '3', :title => 'motivacion_pregunta21_3' %>
+              <%= f.radio_button :representacion_pregunta21, '4', :title => 'motivacion_pregunta21_4' %>
+              <%= f.radio_button :representacion_pregunta21, '5', :title => 'motivacion_pregunta21_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.representacion_pregunta22') %>
+              <button id='boton22' type='button' onclick="verResto('myDIV22'); verMasMenos('boton22');">+</button>
+              <div id='myDIV22' style='display:none;'><%= t('mio.representacion_pregunta22_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :representacion_pregunta22, '1', :title => 'motivacion_pregunta22_1' %>
+              <%= f.radio_button :representacion_pregunta22, '2', :title => 'motivacion_pregunta22_2' %>
+              <%= f.radio_button :representacion_pregunta22, '3', :title => 'motivacion_pregunta22_3' %>
+              <%= f.radio_button :representacion_pregunta22, '4', :title => 'motivacion_pregunta22_4' %>
+              <%= f.radio_button :representacion_pregunta22, '5', :title => 'motivacion_pregunta22_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'> 
+              <h4><%= t('mio.representacion') %></h4>
+            </div>
+            <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+              <%= f.text_area :representacion, :class => "form-control", :title => 'texto representación' %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading"> 
+          <div class="row">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <h3><%= t('mio.expresion_cabecera') %></h3>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+                <h4>1 2 3 4 5</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.expresion_pregunta23') %>
+              <button id='boton23' type='button' onclick="verResto('myDIV23'); verMasMenos('boton23');">+</button>
+              <div id='myDIV23' style='display:none;'><%= t('mio.expresion_pregunta23_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :expresion_pregunta23, '1', :title => 'motivacion_pregunta23_1' %>
+              <%= f.radio_button :expresion_pregunta23, '2', :title => 'motivacion_pregunta23_2' %>
+              <%= f.radio_button :expresion_pregunta23, '3', :title => 'motivacion_pregunta23_3' %>
+              <%= f.radio_button :expresion_pregunta23, '4', :title => 'motivacion_pregunta23_4' %>
+              <%= f.radio_button :expresion_pregunta23, '5', :title => 'motivacion_pregunta23_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.expresion_pregunta24') %>
+              <button id='boton24' type='button' onclick="verResto('myDIV24'); verMasMenos('boton24');">+</button>
+              <div id='myDIV24' style='display:none;'><%= t('mio.expresion_pregunta24_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :expresion_pregunta24, '1', :title => 'motivacion_pregunta24_1' %>
+              <%= f.radio_button :expresion_pregunta24, '2', :title => 'motivacion_pregunta24_2' %>
+              <%= f.radio_button :expresion_pregunta24, '3', :title => 'motivacion_pregunta24_3' %>
+              <%= f.radio_button :expresion_pregunta24, '4', :title => 'motivacion_pregunta24_4' %>
+              <%= f.radio_button :expresion_pregunta24, '5', :title => 'motivacion_pregunta24_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.expresion_pregunta25') %>
+              <button id='boton25' type='button' onclick="verResto('myDIV25'); verMasMenos('boton25');">+</button>
+              <div id='myDIV25' style='display:none;'><%= t('mio.expresion_pregunta25_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :expresion_pregunta25, '1', :title => 'motivacion_pregunta25_1' %>
+              <%= f.radio_button :expresion_pregunta25, '2', :title => 'motivacion_pregunta25_2' %>
+              <%= f.radio_button :expresion_pregunta25, '3', :title => 'motivacion_pregunta25_3' %>
+              <%= f.radio_button :expresion_pregunta25, '4', :title => 'motivacion_pregunta25_4' %>
+              <%= f.radio_button :expresion_pregunta25, '5', :title => 'motivacion_pregunta25_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.expresion_pregunta26') %>
+              <button id='boton26' type='button' onclick="verResto('myDIV26'); verMasMenos('boton26');">+</button>
+              <div id='myDIV26' style='display:none;'><%= t('mio.expresion_pregunta26_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :expresion_pregunta26, '1', :title => 'motivacion_pregunta26_1' %>
+              <%= f.radio_button :expresion_pregunta26, '2', :title => 'motivacion_pregunta26_2' %>
+              <%= f.radio_button :expresion_pregunta26, '3', :title => 'motivacion_pregunta26_3' %>
+              <%= f.radio_button :expresion_pregunta26, '4', :title => 'motivacion_pregunta26_4' %>
+              <%= f.radio_button :expresion_pregunta26, '5', :title => 'motivacion_pregunta26_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.expresion_pregunta27') %>
+              <button id='boton27' type='button' onclick="verResto('myDIV27'); verMasMenos('boton27');">+</button>
+              <div id='myDIV27' style='display:none;'><%= t('mio.expresion_pregunta27_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :expresion_pregunta27, '1', :title => 'motivacion_pregunta27_1' %>
+              <%= f.radio_button :expresion_pregunta27, '2', :title => 'motivacion_pregunta27_2' %>
+              <%= f.radio_button :expresion_pregunta27, '3', :title => 'motivacion_pregunta27_3' %>
+              <%= f.radio_button :expresion_pregunta27, '4', :title => 'motivacion_pregunta27_4' %>
+              <%= f.radio_button :expresion_pregunta27, '5', :title => 'motivacion_pregunta27_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.expresion_pregunta28') %>
+              <button id='boton28' type='button' onclick="verResto('myDIV28'); verMasMenos('boton28');">+</button>
+              <div id='myDIV28' style='display:none;'><%= t('mio.expresion_pregunta28_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :expresion_pregunta28, '1', :title => 'motivacion_pregunta28_1' %>
+              <%= f.radio_button :expresion_pregunta28, '2', :title => 'motivacion_pregunta28_2' %>
+              <%= f.radio_button :expresion_pregunta28, '3', :title => 'motivacion_pregunta28_3' %>
+              <%= f.radio_button :expresion_pregunta28, '4', :title => 'motivacion_pregunta28_4' %>
+              <%= f.radio_button :expresion_pregunta28, '5', :title => 'motivacion_pregunta28_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.expresion_pregunta29') %>
+              <button id='boton29' type='button' onclick="verResto('myDIV29'); verMasMenos('boton29');">+</button>
+              <div id='myDIV29' style='display:none;'><%= t('mio.expresion_pregunta29_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :expresion_pregunta29, '1', :title => 'motivacion_pregunta29_1' %>
+              <%= f.radio_button :expresion_pregunta29, '2', :title => 'motivacion_pregunta29_2' %>
+              <%= f.radio_button :expresion_pregunta29, '3', :title => 'motivacion_pregunta29_3' %>
+              <%= f.radio_button :expresion_pregunta29, '4', :title => 'motivacion_pregunta29_4' %>
+              <%= f.radio_button :expresion_pregunta29, '5', :title => 'motivacion_pregunta29_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.expresion_pregunta30') %>
+              <button id='boton30' type='button' onclick="verResto('myDIV30'); verMasMenos('boton30');">+</button>
+              <div id='myDIV30' style='display:none;'><%= t('mio.expresion_pregunta30_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :expresion_pregunta30, '1', :title => 'motivacion_pregunta30_1' %>
+              <%= f.radio_button :expresion_pregunta30, '2', :title => 'motivacion_pregunta30_2' %>
+              <%= f.radio_button :expresion_pregunta30, '3', :title => 'motivacion_pregunta30_3' %>
+              <%= f.radio_button :expresion_pregunta30, '4', :title => 'motivacion_pregunta30_4' %>
+              <%= f.radio_button :expresion_pregunta30, '5', :title => 'motivacion_pregunta30_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-10 col-md-9 col-sm-8 col-xs-12'>
+              <%= t('mio.expresion_pregunta31') %>
+              <button id='boton31' type='button' onclick="verResto('myDIV31'); verMasMenos('boton31');">+</button>
+              <div id='myDIV31' style='display:none;'><%= t('mio.expresion_pregunta31_mas') %></div>
+            </div>
+            <div class='col-lg-2 col-md-3 col-sm-4 col-xs-12'> 
+              <div class="pull-right">
+              <%= f.radio_button :expresion_pregunta31, '1', :title => 'motivacion_pregunta31_1' %>
+              <%= f.radio_button :expresion_pregunta31, '2', :title => 'motivacion_pregunta31_2' %>
+              <%= f.radio_button :expresion_pregunta31, '3', :title => 'motivacion_pregunta31_3' %>
+              <%= f.radio_button :expresion_pregunta31, '4', :title => 'motivacion_pregunta31_4' %>
+              <%= f.radio_button :expresion_pregunta31, '5', :title => 'motivacion_pregunta31_5' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'> 
+              <h4><%= t('mio.expresion') %></h4>
+            </div>
+            <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'> 
+              <%= f.text_area :expresion, :class => "form-control", :title => 'texto expresión' %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'> 
+  				<h4><%= t('mio.texto_libre') %></h4>
+        </div>
+        <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'> 
+          <%= f.text_area :texto_libre, :class => "form-control", :title => 'texto libre' %>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <button type="submit" class="btn btn-primary" id="boton_aceptar">
+          <i class="glyphicon glyphicon-ok-sign"></i> 
+          <%= @evaluacion.new_record? ? "#{t('helpers.links.create')} #{t('mio.evaluacion')}" : "#{t('helpers.links.update')} #{t('mio.evaluacion')}" %>
+        </button>
+
+        <%= link_to home_index_url(:buscar => @evaluacion.curso.nombre), :class => 'btn btn-default' do %>
+          <span class="glyphicon glyphicon-remove-sign"></span>
+          <%= t('helpers.links.cancel') %>
+        <% end %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

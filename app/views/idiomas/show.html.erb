@@ -1,0 +1,62 @@
+<% breadcrumb :idioma, @idioma %>
+
+<%- model_class = Idioma -%>
+<div class="col-md-12">
+  <div class="well col-md-12 ">
+    <dl class="dl-horizontal">
+      <dt><%= t('mio.campo_descripcion') %>:</dt>
+      <dd><%= @idioma.descripcion %></dd>
+
+    </dl>
+
+    <div class="panel-footer">
+      <%= link_to idiomas_path, :class => 'btn btn-default' do %>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <%= t('.back', :default => t("helpers.links.back", :default => 'Volver')) %>
+      <% end %>
+      <%= link_to edit_idioma_path(@idioma), :class => 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <%= t('.edit', :default => t("helpers.links.edit", :default => 'Editar')) %>
+      <% end %>
+
+      <%= link_to idioma_path(@idioma), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => "¿Eliminar el idioma '#{@idioma.id}'?")) }, :class => 'btn btn-danger' do %>
+        <span class="glyphicon glyphicon-trash"></span>
+        <%= t('.destroy', :default => t("helpers.links.destroy")) %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="well">
+    <h3><%= t('mio.idioma_show_1') %></h3>
+    <% unless @audios.nil? -%>
+      <% unless @audios.empty? -%>
+        <%= render partial: "audios/tabla3", locals: {registros: @audios} %>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="well">
+    <h3><%= t('mio.idioma_show_2') %></h3>
+    <% unless @subtitulos.nil? -%>
+      <% unless @subtitulos.empty? -%>
+        <%= render partial: "subtitulos/tabla3", locals: {registros: @subtitulos} %>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="well">
+    <h3><%= t('mio.idioma_show_3') %></h3>
+    <% unless @transcripciones.nil? -%>
+      <% unless @transcripciones.empty? -%>
+        <%= render partial: "transcripciones/tabla3", locals: {registros: @transcripciones} %>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>
+

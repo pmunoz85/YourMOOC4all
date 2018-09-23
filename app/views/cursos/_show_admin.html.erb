@@ -1,0 +1,195 @@
+<%- model_class = Curso -%>
+<div class="col-md-12">
+  <div class="well col-md-12 ">
+    <dl class="dl-horizontal">
+      <p>
+        <dt>
+          <%= t('mio.curso_calificacion') %>:<%= @curso.mostrar_puntuacion %>
+        </dt>
+        <dd>
+          <% if Evaluacion.where("curso_id = #{@curso.id}").count == 0 %>
+            <%= t('mio.sin_puntuacion') %>
+          <% else %>
+            <div class="stars-fieldset">
+              <span class="stars stars-<%= @curso.puntuacion_estrella %>"></span>
+            </div> 
+          <% end %>
+        </dd>
+      </p>
+      <p>
+        <dt><%= t('mio.curso_puntuar') %></dt>
+        <dd>
+          <% if Evaluacion.where("user_id = #{current_user.id} and curso_id = #{@curso.id}").count == 0 %>
+            <%= link_to t('mio.votar'), new_evaluacion_url(:user => current_user.id, :curso => @curso.id) %>
+          <% else %>
+            <%= link_to t('mio.editar_votacion'), @curso.evaluaciones.where("user_id = #{current_user.id}").first %>
+            <br /><%= @curso.puntuacion_texto_corto %>
+          <% end %>
+        </dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_oculto') %>:</dt>
+      <dd><%= if @curso.oculto then 'Sí' else 'No' end %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_identificador') %>:</dt>
+      <dd><%= @curso.identificador %></dd>
+      </p>
+      <p>
+      <dt>Url:</dt>
+      <dd><%= @curso.url %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_nombre') %>:</dt>
+      <dd><%= @curso.nombre %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_imagen') %>:</dt>
+      <dd><%= image_tag(@curso.imagen_url, size: '150x150') %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_plataforma') %>:</dt>
+      <dd><%= @curso.proveedor %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_institucion') %>:</dt>
+      <dd><%= @curso.universidad %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_tematica') %>:</dt>
+      <dd>
+        <%= @curso.tematica.gsub(/^\s+/,'').gsub(/\n/,'<br />').html_safe unless @curso.tematica.nil? %>
+        <%#= @curso.tematica.html_safe unless @curso.tematica.nil? %>
+      </dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_informacion') %>:</dt>
+      <dd>
+        <%= @curso.informacion.gsub(/^\s+/,'').gsub(/\n/,'<br />').html_safe unless @curso.informacion.nil? %>
+        <%#= @curso.informacion.html_safe unless @curso.informacion.nil? %>
+      </dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_objetivos') %>:</dt>
+      <dd><%= @curso.objetivos %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_conocimientos') %>:</dt>
+      <dd><%= @curso.conocimientos_previos %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_destinatarios') %>:</dt>
+      <dd><%= @curso.destinatarios %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_actividades') %>:</dt>
+      <dd><%= @curso.evaluacion %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_esfuerzo') %>:</dt>
+      <dd><%= @curso.esfuerzo_estimado.html_safe unless @curso.esfuerzo_estimado.nil? %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_proxima') %>:</dt>
+      <dd><%= @curso.inicio %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_signos') %>:</dt>
+      <dd><%= if @curso.lenguaje_signos then 'Sí' else 'No' end %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_precio_auditado') %>:</dt>
+      <dd><%= @curso.precio_auditado %></dd>
+      </p>
+      <p>
+      <dt><%= t('mio.curso_precio_credencial') %>:</dt>
+      <dd><%= @curso.precio_credencial %></dd>
+      </p>
+      <p>
+      <p>
+      <dt><%= t('mio.curso_edicion_anterior') %>:</dt>
+      <dd><%= Curso.find(@curso.edicion_anterior_id).nombre unless @curso.edicion_anterior_id.nil? %></dd>
+      </p>
+      <dt><%= t('mio.curso_enlace_al') %>:</dt>
+      <dd>
+        <%= link_to "#{@curso.url}#{@curso.identificador}", :class => 'btn btn-default' do %>
+          <span class="glyphicon glyphicon-share"></span>
+        <% end -%>
+      </dd>
+      </p>
+    </dl>
+
+    <div class="panel-footer">
+      <%= link_to cursos_path, :class => 'btn btn-default' do %>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <%= t('.back', :default => t("helpers.links.back", :default => 'Volver')) %>
+      <% end %>
+      <%= link_to edit_curso_path(@curso), :class => 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <%= t('.edit', :default => t("helpers.links.edit", :default => 'Editar')) %>
+      <% end %>
+
+      <%= link_to curso_path(@curso), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => "¿Eliminar el curso '#{@curso.id}'?")) }, :class => 'btn btn-danger' do %>
+        <span class="glyphicon glyphicon-trash"></span>
+        <%= t('.destroy', :default => t("helpers.links.destroy")) %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="well">
+    <%= link_to new_transcripcion_path(:curso_id => @curso.id), :class => 'btn btn-primary pull-right' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      <%= "#{t('helpers.links.new')} #{t('mio.transcripcion')}" %>
+    <% end %>
+    <h3><%= t('mio.transcripciones') %></h3>
+    <% unless @transcripciones.nil? -%>
+      <% unless @transcripciones.empty? -%>
+        <%= render partial: "transcripciones/tabla2", locals: {registros: @transcripciones} %>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="well">
+    <%= link_to new_audio_path(:curso_id => @curso.id), :class => 'btn btn-primary pull-right' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      <%= "#{t('helpers.links.new')} #{t('mio.audio')}" %>
+    <% end %>
+    <h3><%= t('mio.audios') %></h3>
+    <% unless @audios.nil? -%>
+      <% unless @audios.empty? -%>
+        <%= render partial: "audios/tabla2", locals: {registros: @audios} %>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="well">
+    <%= link_to new_subtitulo_path(:curso_id => @curso.id), :class => 'btn btn-primary pull-right' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      <%= "#{t('helpers.links.new')} #{t('mio.subtitulo')}" %>
+    <% end %>
+    <h3><%= t('mio.subtitulos') %></h3>
+    <% unless @subtitulos.nil? -%>
+      <% unless @subtitulos.empty? -%>
+        <%= render partial: "subtitulos/tabla2", locals: {registros: @subtitulos} %>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="well">
+    <h3><%= t('mio.evaluaciones') %></h3>
+    <% unless @evaluaciones.nil? -%>
+      <% unless @evaluaciones.empty? -%>
+        <%= render partial: "evaluaciones/tabla2", locals: {registros: @evaluaciones} %>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>
+

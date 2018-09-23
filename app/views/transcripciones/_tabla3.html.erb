@@ -1,0 +1,21 @@
+    <div class="pagination">
+      <%= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>
+
+    <table class="table table-condensed table-striped table-hover">
+      <thead>
+        <tr>
+        <th>Curso</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        <%= content_tag_for(:tr, registros) do |transcripcion| %>
+          <td><%= link_to transcripcion.curso, transcripcion %></td>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <%#= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>

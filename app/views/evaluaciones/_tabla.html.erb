@@ -1,0 +1,93 @@
+    <div class="pagination">
+      <%= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>
+
+    <table class="table table-condensed table-striped table-hover">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Curso</th>
+          <th>Motivacion pregunta1</th>
+          <th>Motivacion pregunta2</th>
+          <th>Motivacion pregunta3</th>
+          <th>Motivacion pregunta4</th>
+          <th>Motivacion pregunta5</th>
+          <th>Motivacion pregunta6</th>
+          <th>Motivacion pregunta7</th>
+          <th>Motivacion pregunta8</th>
+          <th>Motivacion pregunta9</th>
+          <th>Motivacion pregunta10</th>
+          <th>Motivacion</th>
+          <th>Representacion pregunta11</th>
+          <th>Representacion pregunta12</th>
+          <th>Representacion pregunta13</th>
+          <th>Representacion pregunta14</th>
+          <th>Representacion pregunta15</th>
+          <th>Representacion pregunta16</th>
+          <th>Representacion pregunta17</th>
+          <th>Representacion pregunta18</th>
+          <th>Representacion pregunta19</th>
+          <th>Representacion pregunta20</th>
+          <th>Representacion pregunta21</th>
+          <th>Representacion pregunta22</th>
+          <th>Representacion</th>
+          <th>Expresion pregunta23</th>
+          <th>Expresion pregunta24</th>
+          <th>Expresion pregunta25</th>
+          <th>Expresion pregunta26</th>
+          <th>Expresion pregunta27</th>
+          <th>Expresion pregunta28</th>
+          <th>Expresion pregunta29</th>
+          <th>Expresion pregunta30</th>
+          <th>Expresion pregunta31</th>
+          <th>Expresion</th>
+          <th>Texto libre</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= content_tag_for(:tr, registros) do |evaluacion| %>
+          <td><%= link_to evaluacion.user, evaluacion %></td>
+          <td><%= link_to evaluacion.curso, edit_evaluacion_path(evaluacion) %></td>
+          <td><%= evaluacion.motivacion_pregunta1 %></td>
+          <td><%= evaluacion.motivacion_pregunta2 %></td>
+          <td><%= evaluacion.motivacion_pregunta3 %></td>
+          <td><%= evaluacion.motivacion_pregunta4 %></td>
+          <td><%= evaluacion.motivacion_pregunta5 %></td>
+          <td><%= evaluacion.motivacion_pregunta6 %></td>
+          <td><%= evaluacion.motivacion_pregunta7 %></td>
+          <td><%= evaluacion.motivacion_pregunta8 %></td>
+          <td><%= evaluacion.motivacion_pregunta9 %></td>
+          <td><%= evaluacion.motivacion_pregunta10 %></td>
+          <td><%= evaluacion.motivacion %></td>
+          <td><%= evaluacion.representacion_pregunta11 %></td>
+          <td><%= evaluacion.representacion_pregunta12 %></td>
+          <td><%= evaluacion.representacion_pregunta13 %></td>
+          <td><%= evaluacion.representacion_pregunta14 %></td>
+          <td><%= evaluacion.representacion_pregunta15 %></td>
+          <td><%= evaluacion.representacion_pregunta16 %></td>
+          <td><%= evaluacion.representacion_pregunta17 %></td>
+          <td><%= evaluacion.representacion_pregunta18 %></td>
+          <td><%= evaluacion.representacion_pregunta19 %></td>
+          <td><%= evaluacion.representacion_pregunta20 %></td>
+          <td><%= evaluacion.representacion_pregunta21 %></td>
+          <td><%= evaluacion.representacion_pregunta22 %></td>
+          <td><%= evaluacion.representacion %></td>
+          <td><%= evaluacion.expresion_pregunta23 %></td>
+          <td><%= evaluacion.expresion_pregunta24 %></td>
+          <td><%= evaluacion.expresion_pregunta25 %></td>
+          <td><%= evaluacion.expresion_pregunta26 %></td>
+          <td><%= evaluacion.expresion_pregunta27 %></td>
+          <td><%= evaluacion.expresion_pregunta28 %></td>
+          <td><%= evaluacion.expresion_pregunta29 %></td>
+          <td><%= evaluacion.expresion_pregunta30 %></td>
+          <td><%= evaluacion.expresion_pregunta31 %></td>
+          <td><%= evaluacion.expresion %></td>
+          <td><%= evaluacion.texto_libre %></td>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <%#= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>

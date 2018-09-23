@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang=es>
+<head>
+  <meta charset="utf-8">
+  <title>YourMOOC4all</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Sitio de la administración de la aplicación">
+  <meta name="author" content="Pedro Manuel Muñoz Morales">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <%= javascript_include_tag "https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js", "https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js" %>
+  <![endif]-->
+
+  <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
+  <%= csrf_meta_tags %>
+  <% if params[:locale] == "es" then %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-es_ES.js"></script>
+  <% end %>
+</head>
+
+<body style='padding: 0'>
+
+  <%= render partial: 'layouts/cabecera'  %>
+
+  <div id='centro' class='container-fluid' >
+    <%= render partial: 'layouts/buscador'  %>
+
+    <%= render partial: 'layouts/enlaces'  %>
+  </div>
+
+
+  <div class="container layout-contenido">
+
+    <%= yield %>
+  
+  </div>
+
+
+  <%= render partial: 'layouts/pie'  %>
+
+</body>
+</html>

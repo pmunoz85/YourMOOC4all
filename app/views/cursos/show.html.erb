@@ -1,0 +1,12 @@
+<% breadcrumb :curso, @curso %>
+
+<%- model_class = Curso -%>
+<% if current_user.nil? then %>
+  <%= render partial: 'show_user', :locals => {:curso => @curso} %>
+<% else %>
+  <% if current_user.has_role? 'administrador' then %>
+    <%= render partial: 'show_admin', :locals => {:curso => @curso} %>
+  <% else %>
+    <%= render partial: 'show_user', :locals => {:curso => @curso} %>
+  <% end %>
+<% end %>

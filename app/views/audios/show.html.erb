@@ -1,0 +1,40 @@
+<%- model_class = Audio -%>
+<div class="col-md-12">
+  <div class="well col-md-12 ">
+    <dl class="dl-horizontal">
+      <dt>Curso:</dt>
+      <dd><%= @audio.curso %></dd>
+      <dt>Idioma:</dt>
+      <dd><%= @audio.idioma %></dd>
+
+    </dl>
+
+    <div class="panel-footer">
+      <%= link_to audios_path, :class => 'btn btn-default' do %>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <%= t('.back', :default => t("helpers.links.back", :default => 'Volver')) %>
+      <% end %>
+      <%= link_to edit_audio_path(@audio), :class => 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <%= t('.edit', :default => t("helpers.links.edit", :default => 'Editar')) %>
+      <% end %>
+
+      <%= link_to audio_path(@audio), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => "¿Eliminar el audio '#{@audio.id}'?")) }, :class => 'btn btn-danger' do %>
+        <span class="glyphicon glyphicon-trash"></span>
+        <%= t('.destroy', :default => t("helpers.links.destroy")) %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+  
+                                
+    
+    
+    
+    
+                                
+    
+    
+    
+  

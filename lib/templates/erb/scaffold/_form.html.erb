@@ -1,0 +1,63 @@
+<div class="col-md-12">
+  <div class="well col-md-12 col-md-offset-0">
+    <%%= form_for(@<%= singular_table_name %>, :html => { :class => "form-horizontal" }) do |f| %>
+      <%% if @<%= singular_table_name %>.errors.any? %>
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><%%= I18n.t("errors.messages.not_saved", :count => @<%= singular_table_name %>.errors.count, :resource => "<%= singular_table_name %>") %></h4>
+
+          <ul>
+          <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
+            <li><%%= msg %></li>
+          <%% end %>
+          </ul>
+        </div>
+      <%% end %>
+
+<% attributes.each do |attribute| -%>
+  <% if "#{attribute.name}" == "nif_cif" then -%>
+      <input type='hidden' id='path_verificar' value='<%%= verificar_dni_<%= plural_table_name %>_url %>.json'/>
+  <% end -%>
+      <div class="form-group">
+        <%%= f.label :<%= attribute.name %>, :class => "col-sm-2 control-label" %>
+  <% if "#{attribute.field_type}" == "date_select" then -%>
+        <div class="col-sm-2">
+          <%%= f.text_field :<%= attribute.name %>, :class => "form-control fecha", :autocomplete => "off" %>
+  <% else -%>
+    <% if "#{attribute.field_type}" == "datetime_select" then -%>
+        <div class="col-sm-3">
+          <%%= f.text_field :<%= attribute.name %>, :class => "form-control fecha-hora", :autocomplete => "off" %>
+    <% else -%>
+        <div class="col-sm-<%= if attribute.name == 'numero' then '5' else '10' end -%>">
+      <% if attribute.attr_options[:index] then -%>
+  <%- nombre_campo_externo = "descripcion" -%>
+  <%- nombre_campo_externo = "nombre" if "#{attribute.name.camelize}".constantize.column_names.map{ |a| a }.include?('nombre') -%>
+  <%- nombre_campo_externo = "name" if "#{attribute.name.camelize}".constantize.column_names.map{ |a| a }.include?('name') -%>
+  <%- nombre_campo_externo = "descripcion" if "#{attribute.name.camelize}".constantize.column_names.map{ |a| a }.include?('descripcion') -%>
+          <%%= f.text_field :<%= attribute.name %>_<%= nombre_campo_externo %>, 
+               :class => "desplegable form-control typeahead",
+               :valor_inicial => "",
+               :datos_consulta => listado_<%= attribute.name.pluralize %>_url, 
+               :placeholder => 'La búsqueda se activa a partir del tercer carácter.' %>
+      <% else -%>
+          <%%= f.<%= attribute.field_type %> :<%= attribute.name %>, :class => "form-control<%= " nif_cif" if attribute.name == 'nif_cif' -%>"<%= ", :placeholder => 'El número es auto-incremental'" if attribute.name == 'numero' -%> %>
+      <% end -%>
+    <% end -%>
+  <% end -%>
+        </div>
+      </div>
+<% end -%>
+      <div class="panel-footer">
+        <button type="submit" class="btn btn-primary" id="boton_aceptar">
+          <i class="glyphicon glyphicon-ok-sign"></i> 
+          <%%= @<%= singular_table_name %>.new_record? ? 'Crear <%= singular_table_name %>' : 'Actualizar <%= singular_table_name %>' %>
+        </button>
+        <%%= link_to <%= plural_table_name %>_path, :class => 'btn btn-default' do %>
+          <span class="glyphicon glyphicon-remove-sign"></span>
+          Cancelar
+        <%% end %>
+      </div>
+
+    <%% end %>
+  </div>
+</div>

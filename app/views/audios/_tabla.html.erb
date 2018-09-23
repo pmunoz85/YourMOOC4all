@@ -1,0 +1,23 @@
+    <div class="pagination">
+      <%= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>
+
+    <table class="table table-condensed table-striped table-hover">
+      <thead>
+        <tr>
+          <th><%= t('mio.evaluacion_curso') %></th>
+          <th><%= t('mio.evaluacion_idioma') %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= content_tag_for(:tr, registros) do |audio| %>
+          <td><%= link_to audio.curso, audio %></td>
+          <td><%= link_to audio.idioma, edit_audio_path(audio) %></td>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <%#= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>

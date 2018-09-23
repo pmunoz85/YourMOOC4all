@@ -1,0 +1,37 @@
+<% breadcrumb :root %>
+
+<div class="page-header">
+  <h1> <%= "#{t('mio.grafico')} #{Evaluacion.count} #{t('mio.realizadas')}" %> </h1>
+</div>
+
+
+	<%= pie_chart @datos_grafico1 %>
+
+<%#= bar_chart @votacion_por_plataforma, legend: "top", min: 1, max: 5, :library => {:colors => ['#999']} %>
+
+<div class="page-body">
+  <h1><%= t('mio.botones') %></h1>
+</div>
+
+<%= link_to 'UNED Abierta', administrador_index_url(:nombre => 'UNED Abierta', :sitio => "https://iedra.uned.es") , :class => 'btn btn-default' %>
+<%= link_to 'MiriadaX', administrador_index_url(:nombre => 'MiriadaX', :sitio => "https://miriadax.net") , :class => 'btn btn-default' %>
+<%= link_to 'edX', administrador_index_url(:nombre => 'edX', :sitio => "https://www.edx.org") , :class => 'btn btn-default' %>
+<%= link_to 'Coursera', administrador_index_url(:nombre => 'Coursera', :sitio => "https://www.coursera.org") , :class => 'btn btn-default' %>
+<%= link_to t('mio.todo'), administrador_index_url(:nombre => 'Todo', :sitio => "Todo") , :class => 'btn btn-default' %>
+
+<br />
+<br />
+<br />
+
+<% unless @cursos.nil? or @cursos.empty? %>
+
+	<div class="col-md-12">
+	  <div class="well-sombra well col-md-12 col-md-offset-0">
+
+	    <%= render partial: 'cursos/tabla', locals: {registros: @cursos} %>
+
+	  </div>
+	 </div>
+<% end %>
+
+

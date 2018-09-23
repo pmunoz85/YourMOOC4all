@@ -1,0 +1,47 @@
+
+    <div id='buscador' class='col-lg-8 col-md-7 col-sm-6 col-xs-12'>
+  
+      <h3><%= t("mio.busqueda_texto") %></h3>
+
+      <%= form_tag home_index_path, :method => :get, :class => 'row', :role => 'search' do %>
+        <h3>
+          <div class="row form-group">
+            <div class='col-lg-10 col-md-10 col-sm-10 col-xs-10'>
+              <%= search_field_tag :buscar, @buscar, :placeholder => t("mio.busqueda_interno"), :autofocus => true, :class => 'form-control' %>
+            </div>
+            <div class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>
+              <button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span></button>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class='col-lg-6 col-md-5 col-sm-5 col-xs-10'>
+              <label for="campo_busqueda">
+                <%= t("mio.campo_busqueda") %>
+              </label> 
+            </div>
+
+            <div class='col-lg-4 col-md-5 col-sm-5 col-xs-10'>
+              <%#= select_tag "campo_busqueda", options_for_select([ "Todos", "Título del curso", "Temática", "Información" ],params[:campo_busqueda]), {:class => "selectpicker", 'data-width' => "100%"} %>
+              <%= select_tag "campo_busqueda", options_for_select([ t("mio.campo_busqueda_todos"), t("mio.campo_busqueda_titulo"), t("mio.campo_busqueda_tematica"), t("mio.campo_busqueda_informacion") ], session[:campo_busqueda]), {:class => "selectpicker", 'data-width' => "100%"} %>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class='col-lg-6 col-md-5 col-sm-5 col-xs-10'>
+              <label for="orden_busqueda">
+                <%= t("mio.orden") %> 
+              </label>
+            </div>
+            <div class='col-lg-4 col-md-5 col-sm-5 col-xs-10'>
+              <%#= select_tag "orden_busqueda", options_for_select([ "Título del curso", "Instituciones", "Plataformas", "Puntuación obtenida" ],params[:orden_busqueda]), {:class => "selectpicker", 'data-width' => "100%"} %>
+              <%= select_tag "orden_busqueda", options_for_select([ t("mio.orden_busqueda_titulo"), t("mio.orden_busqueda_instituciones"), t("mio.orden_busqueda_plataformas"), t("mio.orden_busqueda_puntuacion") ],session[:orden_busqueda]), {:class => "selectpicker", 'data-width' => "100%"} %>
+            </div>
+          </div>
+        </h3>
+      <% end %>
+
+    </div>
+
+
+

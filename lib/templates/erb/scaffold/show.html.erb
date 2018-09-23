@@ -1,0 +1,54 @@
+<%%- model_class = <%= singular_table_name.camelize %> -%>
+<div class="col-md-12">
+  <div class="well col-md-12 ">
+    <dl class="dl-horizontal">
+<% nombre_campos_externos = [] -%>
+      <%- attributes.each do |attribute| -%>
+      <dt><%= attribute.human_name %>:</dt>
+      <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
+      <%- end -%>
+
+    </dl>
+
+    <div class="panel-footer">
+      <%%= link_to <%= plural_table_name %>_path, :class => 'btn btn-default' do %>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <%%= t('.back', :default => t("helpers.links.back", :default => 'Volver')) %>
+      <%% end %>
+      <%%= link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), :class => 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <%%= t('.edit', :default => t("helpers.links.edit", :default => 'Editar')) %>
+      <%% end %>
+
+      <%%= link_to <%= singular_table_name %>_path(@<%= singular_table_name %>), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => "¿Eliminar el <%= singular_table_name %> '#{@<%= singular_table_name %>.id}'?")) }, :class => 'btn btn-danger' do %>
+        <span class="glyphicon glyphicon-trash"></span>
+        <%%= t('.destroy', :default => t("helpers.links.destroy")) %>
+      <%% end %>
+    </div>
+  </div>
+</div>
+
+<%- attributes.each do |attribute| -%>
+  <% if File.file?("app/views/#{attribute.name.pluralize}/show.html.erb") then -%>
+
+    <% text = '<' + '% unless @registros.nil? -%' + ">\n" -%>
+    <% text += '<' + '% unless @registros.empty? -%' + ">\n" -%>
+    <% text += '<div class="well well-sombra">' + "\n" -%>
+    <% text += '  <h3>registros</h3>' + "\n" -%>
+    <% text += '  <' + '%= render partial: "' + plural_table_name + '/tabla", locals: {registros: @registros} %' + ">\n" -%>
+    <% text += '</div>' + "\n" -%>
+    <% text += '<' + '% end -%' + ">\n" -%>
+    <% text += '<' + '% end -%' + ">\n" -%>
+
+    <% File.open("app/views/#{attribute.name.pluralize}/show.html.erb", "a") {|file| file.puts text} -%>
+
+    <% insert_into_file "app/models/#{attribute.name}.rb", 
+          "\n  has_many :#{plural_table_name}\n", 
+          :after => "class #{attribute.name.camelize} < ActiveRecord::Base" -%>
+
+    <% insert_into_file "app/controllers/#{attribute.name.pluralize}_controller.rb", 
+          "\n    @registros = @#{attribute.name}.#{plural_table_name}.paginate(:page => params[:page], :per_page => 20)\n", 
+          :after => "def show" -%>
+
+  <% end -%>
+<% end -%>

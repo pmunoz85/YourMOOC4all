@@ -1,0 +1,15 @@
+    <div class="pagination">
+      <%= will_paginate registros %>
+    </div>
+
+    <table class="table table-condensed table-striped table-hover">
+      <tbody>
+        <%= content_tag_for(:tr, registros) do |subtitulo| %>
+          <td><h4><%= link_to subtitulo.idioma, edit_subtitulo_path(subtitulo) %></h4></td>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <%#= will_paginate registros %>
+    </div>

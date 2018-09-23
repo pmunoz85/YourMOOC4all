@@ -1,0 +1,143 @@
+    <div class="pagination">
+      <%= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>
+
+    <div class="container">
+      <% registros.map do |curso| %>
+        <article class='well col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+          
+          <div class='col-lg-2 col-md-3 col-sm-3 col-xs-4'>
+            <%= image_tag(curso.imagen_url, size: '140x140', alt: "Imagen del curso: #{curso.nombre}") %>
+          </div>
+
+          <div class='col-lg-2 col-md-3 col-sm-3 col-xs-2 pull-right'>
+              
+              <% if current_user.present? then %> 
+                <% unless current_user.cursos.include? curso %>
+                  <%= link_to inicio_index_url(:megusta => 1, :interesado => curso.id), :class => 'btn btn-default' do %>
+                    <span class="glyphicon glyphicon-eye-open" alt="Marcar como interesante el curso: #{curso.nombre}"></span>
+                    <div class="texto_oculto"> <%= "Marcar curso: #{curso.nombre}" %></div>  
+                  <% end %>
+                <% else %>
+                  <%= link_to inicio_index_url(:megusta => 0, :interesado => curso.id), :class => 'btn btn-default' do %>
+                    <span class="glyphicon glyphicon-eye-close" alt="Desmarcar como interesante el curso: #{curso.nombre}"></span>
+                    <div class="texto_oculto"> <%= "Desmarcar curso: #{curso.nombre}" %></div>  
+                  <% end %>
+                <% end %>
+
+                <% if Evaluacion.where("user_id = #{current_user.id} and curso_id = #{curso.id}").count == 0 %>
+                  <%= link_to new_evaluacion_url(:user => current_user.id, :curso => curso.id),:class => 'btn btn-default' do %>
+                    <span class="glyphicon glyphicon-thumbs-up" alt="Crear votación: #{curso.nombre}"></span>
+                    <div class="texto_oculto"> <%= "Crear votación: #{curso.nombre}" %></div>  
+                  <% end -%>
+                <% else %>
+                  <%= link_to edit_evaluacion_url(curso.evaluaciones.where("user_id = #{current_user.id}").first), :class => 'btn btn-default' do %>
+                    <span class="glyphicon glyphicon-thumbs-up" alt="Editar votación: #{curso.nombre}"></span>
+                    <div class="texto_oculto"> <%= "Editar votación: #{curso.nombre}" %></div>  
+                  <% end -%>
+                <% end %>
+              <% else %>
+                <%= link_to new_evaluacion_url(:user => nil, :curso => curso.id), :class => 'btn btn-default' do %>
+                  <span class="glyphicon glyphicon-thumbs-up" alt="Votar: #{curso.nombre}">
+                    <div class="texto_oculto"> <%= "Votar curso: #{curso.nombre}" %></div>  
+                  </span>
+                <% end -%>
+              <% end %>
+
+              <%= link_to "#{curso.url}#{curso.identificador}", :target => :_blank, :class => 'btn btn-default' do %>
+                <span class="glyphicon glyphicon-share" alt="Enlace del curso: #{curso.nombre}">
+                  <div class="texto_oculto"> <%= "Enlace del curso: #{curso.nombre}" %></div>  
+                </span>
+              <% end -%>
+          </div>
+
+          <div class='col-lg-8 col-md-6 col-sm-6 col-xs-12'>
+            <% if curso.puntuacion_grafico == 'Sin puntuación' %>
+
+              <% if current_user.present? then %> 
+                  <%#= link_to t('mio.sin_puntuacion'), new_evaluacion_url(:user => current_user.id, :curso => curso.id) %>
+                  <%= t('mio.sin_puntuacion') %>
+              <% else %>
+                <%##= link_to t('mio.sin_votacion'), new_evaluacion_url(:user => nil, :curso => curso.id) %>
+                <%= t('mio.sin_votacion') %>
+              <% end %>
+
+            <% else %>
+
+              <div class="stars-fieldset">
+                <%= t('mio.curso_calificacion') %>:<%= curso.mostrar_puntuacion %>
+                <span class="stars stars-<%= curso.puntuacion_estrella %>"></span>
+              </div> 
+              <%= curso.puntuacion_texto_corto %>
+            <% end %>
+          </div>
+
+          <div class='col-lg-9 col-md-8 col-sm-8 col-xs-12'>
+            <strong><%= link_to(highlight_pedro(curso.nombre, @resaltado), curso) %></strong><br /><br />
+          </div>
+          <div class='col-lg-9 col-md-8 col-sm-8 col-xs-12'>
+            <%= highlight_pedro(curso.proveedor.nombre, @resaltado) unless curso.proveedor.nil? %> - 
+            <%= highlight_pedro(curso.universidad.nombre, @resaltado) unless curso.universidad.nil? %> <br /><br />
+          </div>
+          <div class='col-lg-9 col-md-8 col-sm-8 col-xs-12'>
+            <%= highlight_pedro(curso.esfuerzo_estimado.html_safe, @resaltado) unless curso.esfuerzo_estimado.nil? %><br /><br />
+          </div>
+          <div class='col-lg-9 col-md-8 col-sm-12 col-xs-12'>
+            <%#= curso.tematica.html_safe[0,500] unless curso.tematica.nil? %>
+            <%= highlight_pedro(curso.tematica_sin_html, @resaltado) unless curso.tematica.nil? %>
+          </div>
+
+          <div class='col-lg-9 col-md-8 col-sm-12 col-xs-12'>
+            <% unless curso.audios.empty? %>
+              <strong><%= t('mio.audios') %>:</strong> <%= curso.audios.map{|a| a.idioma.descripcion }.join(', ') %>
+            <% end -%>
+            <% unless curso.subtitulos.empty? %>
+              <strong><%= t('mio.subtitulos') %>:</strong> <%= curso.subtitulos.map{|i| i.idioma.descripcion }.join(', ') %>
+            <% end -%>
+            <% unless curso.transcripciones.empty? %>
+              <strong><%= t('mio.transcripciones') %>:</strong> <%= curso.transcripciones.map{|i| i.idioma.descripcion }.join(', ') %>
+            <% end -%>
+          </div>
+
+          <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+            <% unless curso.evaluaciones.nil? %>
+              <% curso.evaluaciones.limit(5).each do |c| %>
+                <div class="panel panel-default">
+                  <div class="panel-heading">Valoración del curso </div>
+                  <div class="panel-body">
+                  <ol>
+                      <% unless c.motivacion.empty? %>
+                        <li>
+                          <%= t('mio.evaluacion_motivacion') %>: <%= c.motivacion %>
+                        </li>
+                      <% end %>
+                      <% unless c.motivacion.empty? %>
+                        <li>
+                          <%= t('mio.evaluacion_representacion') %>: <%= c.representacion unless c.representacion.empty? %>
+                        </li>
+                      <% end %>
+                      <% unless c.motivacion.empty? %>
+                        <li>
+                          <%= t('mio.evaluacion_expresion') %>: <%= c.expresion unless c.expresion.empty? %>
+                        </li>
+                      <% end %>
+                      <% unless c.motivacion.empty? %>
+                        <li>
+                          <%= t('mio.evaluacion_texto') %>: <%= c.texto_libre unless c.texto_libre.empty? %>
+                        </li>
+                      <% end %>
+                  </ol>
+                  </div>
+                </div>
+              <% end %>
+
+            <% end %>
+          </div>
+
+  			</article>
+      <% end -%>
+    </div>
+
+    <div class="pagination">
+      <%#= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>

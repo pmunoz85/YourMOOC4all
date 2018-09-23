@@ -1,0 +1,13 @@
+<div class="col-md-12">
+  <div class="well-sombra well col-md-12 col-md-offset-0">
+  <%%= link_to new_<%= singular_table_name %>_path, :class => 'btn btn-primary pull-right' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      Nuevo <%= singular_table_name %>
+    <%% end %>
+
+    <%%= render partial: 'tabla', locals: {registros: @<%= plural_table_name %>} %>
+
+  </div>
+ </div>
+
+

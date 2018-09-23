@@ -1,0 +1,29 @@
+    <div class="pagination">
+      <%= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>
+
+    <table class="table table-condensed table-striped table-hover">
+      <thead>
+        <tr>
+          <th><%= t('mio.evaluacion_curso') %></th>
+          <th><%= t('mio.evaluacion_motivacion') %></th>
+          <th><%= t('mio.evaluacion_representacion') %></th>
+          <th><%= t('mio.evaluacion_expresion') %></th>
+          <th><%= t('mio.evaluacion_texto') %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= content_tag_for(:tr, registros) do |evaluacion| %>
+          <td><%= evaluacion.curso %></td>
+          <td><%= evaluacion.motivacion %></td>
+          <td><%= evaluacion.representacion %></td>
+          <td><%= evaluacion.expresion %></td>
+          <td><%= evaluacion.texto_libre %></td>
+        <% end -%>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <%#= will_paginate registros, renderer: BootstrapPagination::Rails %>
+    </div>

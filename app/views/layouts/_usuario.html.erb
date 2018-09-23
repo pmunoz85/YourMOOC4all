@@ -1,0 +1,17 @@
+
+    <div id='enlaces'class='row col-lg-4 col-md-5 col-sm-6 col-xs-12 text-center'>
+      <div class='jumbotron'>
+        <div class='row'>
+          <div class='row col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+            <%= link_to destroy_user_session_path, method: :delete, :class => 'navbar-link' do %>
+              <span class='glyphicon glyphicon-off'></span>
+              <%= t('mio.cerrar_sesion') %>
+            <% end %>
+          </div>
+    
+          <div class='row col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+            <a href="<%= edit_user_registration_path %>"><span class='glyphicon glyphicon-edit'></span> <%= current_user.email %></a>
+          </div>
+        </div>
+      </div>
+    </div>
