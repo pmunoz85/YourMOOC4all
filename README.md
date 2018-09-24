@@ -99,4 +99,47 @@ La aplicación web será desarrollada íntegramente con herramientas de código 
 
 Iniesto, Francisco and Rodrigo, Covadonga (2016). Can user recommendations be useful for improving MOOCs accessibility? A project for inclusive design and profitable feedback. In: Open Education Global Conference 2016, 11-13 April 2016, Krakow, Poland.  http://oro.open.ac.uk/46065/
 
+Iniesto, F.; Rodrigo, C. Strategies for improving the level of accessibility in the design of
+MOOC-based learning services. In: International Symposium on Computers in Education
+(SIIE), Salamanca, Spain. (2016)
+
+Iniesto, F.; Rodrigo, C. Can user recommendations be useful for improving MOOCs
+accessibility? A project for inclusive design and profitable feedback. In: Open Education
+Global Conference 2016, Krakow, Poland. (2016)
+
+Yuan, L.; Powell, S.: MOOCs and disruptive innovation: Implications for Higher Education.
+eLearning Papers, In-depth, 33, 2, 1-7 (2013)
+
+Hill, P. Online Educational Delivery Models: A Descriptive View. Edu-cause Review, No
+47(6), Pages 84-86. Retrieved from http://www.educause.edu/ir/library/pdf/ERM1263.pdf
+(2012)
+
+Yang, D.; Sinha, T.; Adamson, D.; Rose, C. P.: Turn on, tune in, drop out: Anticipating
+student dropouts in massive open online courses. In Proceedings of the 2013 NIPS Data-
+Driven Education Workshop (Vol. 10, p. 13) (2013).
+
+Liyanagunawardena, T. R.; Parslow, P.; Williams, S.: Dropout: MOOC participants’
+perspective. Proceedings of the European MOOC Stakeholder Summit 2014 (2014): 95-
+100.
+
+de Waard, I., Gallagher, M. S., Zelezny-Green, R., Czerniewicz, L., Downes, S., Kukulska-
+Hulme, A., & Willems, J.: Challenges for conceptualising EU MOOC for vulnerable learner
+groups. Proceedings of the European MOOC Stakeholder Summit 2014 (2014): 33-42.
+
+CAST. Universal Design for Learning Guidelines version 2.0. Wakefield, MA (2011)
+
+Lucas Carlson, Leonard Richardson: Curso de Ruby, Ruby Cookbook (2009)
+
+Obie Fernandez, Kevin Faustino and Vitaly Kushner: The Rails 4 Way (2014)
+
+Bruce A. Tate, Curt Hibbs: Ruby on Rails (2009)
+
+Santiago Ponce Moreno: Ruby on Rails. Desarrollo práctico de aplicaciones web (2013)
+
+Sam Ruby, Dave Thomas, David Heinemeier Hansson; Traducción de Teresa Samaniego
+Cabañas: Desarrollo Web con Rails (2009)
+
+José López Quijado: Domine HTML y DHTML (2007)
+
+Juan Diego Gauchat: El gran libro de HTML5, CSS3 y JavaScript (2012)
 
